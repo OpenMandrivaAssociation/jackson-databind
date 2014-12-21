@@ -1,32 +1,21 @@
 %{?_javapackages_macros:%_javapackages_macros}
 Name:          jackson-databind
-Version:       2.2.2
-Release:       3.1%{?dist}
+Version:       2.4.2
+Release:       1.1
+Group:         Development/Java
 Summary:       General data-binding package for Jackson (2.x)
 License:       ASL 2.0 and LGPLv2+
 URL:           http://wiki.fasterxml.com/JacksonHome
 Source0:       https://github.com/FasterXML/jackson-databind/archive/%{name}-%{version}.tar.gz
-# jackson-databind package don't include the license file
-# https://github.com/FasterXML/jackson-databind/issues/264
-Source1:       http://www.apache.org/licenses/LICENSE-2.0.txt
-Source2:       http://www.gnu.org/licenses/lgpl-2.1.txt
-
-BuildRequires: java-devel
-BuildRequires: mvn(com.fasterxml:oss-parent) >= 10
-BuildRequires: mvn(com.fasterxml.jackson.core:jackson-annotations) >= %{version}
-BuildRequires: mvn(com.fasterxml.jackson.core:jackson-core) >= %{version}
-
+BuildRequires: mvn(com.fasterxml.jackson:jackson-parent:pom:)
+BuildRequires: mvn(com.fasterxml.jackson.core:jackson-annotations) >= 2.4.1
+BuildRequires: mvn(com.fasterxml.jackson.core:jackson-core) >= 2.4.1
 # test deps
 BuildRequires: mvn(cglib:cglib)
 BuildRequires: mvn(junit:junit)
 BuildRequires: mvn(org.codehaus.groovy:groovy)
 
 BuildRequires: maven-local
-BuildRequires: maven-enforcer-plugin
-BuildRequires: maven-plugin-build-helper
-BuildRequires: maven-plugin-bundle
-BuildRequires: maven-site-plugin
-BuildRequires: maven-surefire-provider-junit4
 BuildRequires: replacer
 # bundle-plugin Requires
 #BuildRequires: mvn(org.sonatype.aether:aether)
@@ -49,9 +38,9 @@ This package contains javadoc for %{name}.
 %prep
 %setup -q -n %{name}-%{name}-%{version}
 
-cp -p %{SOURCE1} .
-cp -p %{SOURCE2} .
-sed -i 's/\r//' LICENSE-2.0.txt lgpl-2.1.txt
+cp -p src/main/resources/META-INF/LICENSE .
+cp -p src/main/resources/META-INF/NOTICE .
+sed -i 's/\r//' LICENSE NOTICE
 
 # unavailable test deps
 %pom_remove_dep org.hibernate:hibernate-cglib-repack
@@ -70,12 +59,27 @@ rm src/test/java/com/fasterxml/jackson/databind/ser/TestJdkTypes.java \
 %mvn_install
 
 %files -f .mfiles
-%doc LICENSE-2.0.txt lgpl-2.1.txt README.md release-notes/*
+%doc LICENSE NOTICE README.md release-notes/*
 
 %files javadoc -f .mfiles-javadoc
-%doc LICENSE-2.0.txt lgpl-2.1.txt
+%doc LICENSE NOTICE
 
 %changelog
+* Sat Sep 20 2014 gil cattaneo <puntogil@libero.it> 2.4.2-1
+- update to 2.4.2
+
+* Wed Jul 23 2014 gil cattaneo <puntogil@libero.it> 2.4.1.3-1
+- update to 2.4.1.3
+
+* Thu Jul 03 2014 gil cattaneo <puntogil@libero.it> 2.4.1.1-1
+- update to 2.4.1.1
+
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.2.2-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
+* Fri Mar 28 2014 Michael Simacek <msimacek@redhat.com> - 2.2.2-4
+- Use Requires: java-headless rebuild (#1067528)
+
 * Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.2.2-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
@@ -95,3 +99,4 @@ rm src/test/java/com/fasterxml/jackson/databind/ser/TestJdkTypes.java \
 
 * Thu Sep 13 2012 gil cattaneo <puntogil@libero.it> 2.0.6-1
 - initial rpm
+
