@@ -1,7 +1,7 @@
 %{?_javapackages_macros:%_javapackages_macros}
 Name:          jackson-databind
 Version:       2.4.2
-Release:       1.2
+Release:       1.3
 Group:         Development/Java
 Summary:       General data-binding package for Jackson (2.x)
 License:       ASL 2.0 and LGPLv2+
