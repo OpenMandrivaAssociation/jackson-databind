@@ -5,7 +5,7 @@ Release:       1.3
 Group:         Development/Java
 Summary:       General data-binding package for Jackson (2.x)
 License:       ASL 2.0 and LGPLv2+
-URL:           http://wiki.fasterxml.com/JacksonHome
+URL:           https://wiki.fasterxml.com/JacksonHome
 Source0:       https://github.com/FasterXML/jackson-databind/archive/%{name}-%{version}.tar.gz
 BuildRequires: mvn(com.fasterxml.jackson:jackson-parent:pom:)
 BuildRequires: mvn(com.fasterxml.jackson.core:jackson-annotations) >= 2.4.1
