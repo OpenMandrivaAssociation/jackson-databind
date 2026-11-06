@@ -161,6 +161,12 @@ if not license_file.is_file():
 meta = Path("src/main/resources/META-INF")
 meta.mkdir(parents=True, exist_ok=True)
 (meta / "LICENSE").write_bytes(license_file.read_bytes())
+# jackson-base points jar:jar at this path. The parent pluginManagement
+# entry survives a child combine.self override.
+(meta / "MANIFEST.MF").write_text(
+    "Manifest-Version: 1.0\nMulti-Release: true\n",
+    encoding="utf-8",
+)
 PY
 
 %build -a
