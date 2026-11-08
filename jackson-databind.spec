@@ -1,5 +1,5 @@
 Name:		jackson-databind
-Version:	2.21.8
+Version:	2.23.0
 Release:	1
 Summary:	General data-binding package for Jackson
 Group:		Development/Java
@@ -15,9 +15,12 @@ BuildRequires:	mvn(com.fasterxml:oss-parent:pom::)
 # oss-parent pins the compiler plugin to this ASM jar.
 BuildRequires:	mvn(org.ow2.asm:asm)
 BuildRequires:	mvn(com.fasterxml.jackson.core:jackson-annotations)
-BuildRequires:	jackson-annotations >= 2.21-2
+BuildRequires:	jackson-annotations >= 2.23
 BuildRequires:	mvn(com.fasterxml.jackson.core:jackson-core)
-BuildRequires:	jackson-core >= 2.21.8
+BuildRequires:	jackson-core >= 2.23.0
+BuildRequires:	jackson-bom >= 2.23.0
+BuildRequires:	jackson-parent >= 2.23
+BuildRequires:	fasterxml-oss-parent >= 81
 # Literal, so the first rpmbuild -bs records them before sysjar is installed.
 BuildRequires:	maven
 BuildRequires:	java-current-devel
@@ -28,11 +31,14 @@ Obsoletes:	jackson2-databind < %{version}-%{release}
 Obsoletes:	%{name}-javadoc < %{version}
 
 %description
-Data binding for Jackson on top of the streaming API. 2.21.8 reports
-a JsonValue cycle as JsonMappingException, makes BeanDescription
-property lookup safe to call concurrently, and validates type
-parameters of polymorphic ids (CVE-2026-110879). The Java 9 module
-is com.fasterxml.jackson.databind. Tests are skipped.
+Data binding for Jackson on top of the streaming API. 2.23.0
+honors FAIL_ON_UNEXPECTED_VIEW_PROPERTIES for constructors,
+builders, unwrapped values, and array shapes. It adds the JDK
+RowSet implementations to the polymorphic deny-list, checks map
+keys the same way as bean types, and fixes null handling for
+primitive problem handlers, identity references, and
+readerForUpdating. The Java 9 module is
+com.fasterxml.jackson.databind. Tests are skipped.
 
 %prep
 %setup -q -n jackson-databind-jackson-databind-%{version}
