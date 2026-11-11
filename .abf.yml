@@ -1,5 +1,6 @@
 sources:
   jackson-databind-2.23.0.tar.gz: 8ce77c64a17d176598727891a0e68ca7d447be50
+  jackson-databind-2.22.3.tar.gz: 42241036d60f442adc40f62e3a3481cdb6fb50a2
 removed_sources:
   jackson-databind-2.2.2.tar.gz: eda21aceb19354fbf6f17e06f423a60621c692d9
   jackson-databind-2.4.2.tar.gz: aaec538f967e8cd0bbff405eef753d10ba2df664
